@@ -73,6 +73,9 @@ public:
 
     int element_index(Node<T>* element) {
         Node<T>* temp = head;
+        if (element == nullptr) {
+            throw std::out_of_range("no such element in this list");
+        }
         for (int a = 0; temp != nullptr; ++a) {
             if (temp == element) {
                 return a;
@@ -98,6 +101,9 @@ public:
     }
 
     void remove(T index) {
+        if (index > list_size || index < 0) {
+            throw std::out_of_range("Index out of range");
+        }
         Node<T>* element_for_delete = search_by_index(index);
 
         if (element_for_delete == head) {
@@ -120,6 +126,7 @@ public:
     }
 
     void remove(Node<T>* element) {
+        //element_index has it own test of argument
         remove(element_index(element));
     }
 
